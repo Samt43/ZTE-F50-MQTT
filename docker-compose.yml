@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  zte-sms-mqtt:
+    build: .
+    image: zte-sms-mqtt:latest
+    container_name: zte-sms-mqtt
+    env_file:
+      - .env
+    network_mode: "host"
+    restart: unless-stopped

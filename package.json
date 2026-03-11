@@ -1,0 +1,15 @@
+{
+  "name": "zte-f50-mqtt-sms",
+  "version": "1.0.0",
+  "description": "SMS <-> MQTT bridge for ZTE F50 modem",
+  "main": "sms2mqtt.js",
+  "scripts": {
+    "start": "node sms2mqtt.js",
+    "dev": "node sms2mqtt.js"
+  },
+  "dependencies": {
+    "@zigasebenik/zte-sms": "github:Samt43/zte-sms#9ef1bcd8f21ec081b463e332f3ae591c01901e39",
+    "mqtt": "^5.15.0",
+    "dotenv": "^16.0.0"
+  }
+}

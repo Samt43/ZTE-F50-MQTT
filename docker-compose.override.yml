@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  zte-sms-mqtt:
+    # Use bridge networking (default) instead of host networking.
+    network_mode: bridge
+    build: .
+    image: zte-sms-mqtt:latest
+    container_name: zte-sms-mqtt-bridge
+    env_file:
+      - .env
+    # Expose MQTT port if you want to reach the container's MQTT client/broker from host
+    # (optional - remove if not needed).
+    ports:
+      - "1883:1883"
+    # Map a friendly hostname to the modem IP (MODEM_IP must be set in .env)
+    extra_hosts:
+      - "zte-modem:${MODEM_IP}"
+    restart: unless-stopped
