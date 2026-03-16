@@ -8,7 +8,7 @@
     "dev": "node sms2mqtt.js"
   },
   "dependencies": {
-    "@zigasebenik/zte-sms": "github:Samt43/zte-sms#84d4b252b0bdd26d44de99d1e660bcdaf931036b",
+    "@zigasebenik/zte-sms": "github:Samt43/zte-sms#b12a519e9d29d1f6f062c700cea9dee77d4f4cfa",
     "mqtt": "^5.15.0",
     "dotenv": "^16.0.0"
   }
