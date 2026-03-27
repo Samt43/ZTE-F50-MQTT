@@ -59,12 +59,18 @@ function scheduleLogout() {
 async function withModem(action) {
   const release = await modemMutex.acquire();
   try {
-    await modem.login();
-    loggedIn = true;
-
-    lastAccess = Date.now();
-    scheduleLogout();
-    return await action();
+    // Try the action first without logging in
+    try {
+      return await action();
+    } catch (err) {
+      // If it fails, try logging in and retrying once
+      console.log('Action failed, attempting login and retry:', err.message);
+      await modem.login();
+      loggedIn = true;
+      lastAccess = Date.now();
+      scheduleLogout();
+      return await action();
+    }
   } finally {
     release();
   }
