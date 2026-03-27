@@ -65,16 +65,22 @@ async function withModem(action) {
     } catch (err) {
       // If it fails, try logging in and retrying once
       console.log('Action failed, attempting login and retry:', err.message);
-      await modem.login();
-      loggedIn = true;
-      lastAccess = Date.now();
-      scheduleLogout();
-      return await action();
+      try {
+        await modem.login();
+        loggedIn = true;
+        lastAccess = Date.now();
+        scheduleLogout();
+        return await action();
+      } catch (retryErr) {
+        console.error('Retry after login failed:', retryErr.message);
+        throw retryErr; // Re-throw so callers can handle it
+      }
     }
   } finally {
     release();
   }
 }
+
 // MQTT connection options (support username/password via env)
 const DRY_RUN = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
 
