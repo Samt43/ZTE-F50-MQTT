@@ -129,7 +129,7 @@ async function checkPing() {
       console.log('Attempting modem reset via resetConnection');
       // call modem resetConnection if available
       await withModem(async () => {
-        await modem.reset5GConnection();
+        await modem.resetConnection();
       });
     } catch (e) {
       console.error('Error during modem resetConnection:', e);
